@@ -7,7 +7,6 @@ A late 2000s era styled random anime generator powered by the AniList API.
 ## Features
 
 - **Retro Aesthetics**: Late 2000s web design with outset borders, gradients, and classic fonts
-- **Custom Cursor**: Chitanda Eru themed cursor
 - **Character Decorations**: Sidebar images of beloved anime characters
 - **Random Anime Discovery**: One-click random anime generation
 - **Comprehensive Stats**: Episodes, genres, scores, studios, themes, and more
@@ -74,7 +73,6 @@ Each random anime shows:
 ## Character Images
 
 The website features AI-generated placeholder images of:
-- **Chitanda Eru** (Hyouka) - Custom cursor
 - **Doraemon** (Doraemon)
 - **Sawamura Eijun** (Ace of Diamond)
 - **Inori Yuzuriha** (Guilty Crown)
@@ -100,3 +98,4 @@ Free to use and modify for personal projects.
 ---
 
 Made with ♥ for Anime Fans
+
