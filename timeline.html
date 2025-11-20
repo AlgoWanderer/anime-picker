@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Timeline</title>
+    <link rel="stylesheet" href="src/timeline.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>ANIME TIMELINE</h1>
+            <a href="index.html" class="back-button">← BACK TO GENERATOR</a>
+        </header>
+
+        <!-- Timeline Container -->
+        <div class="timeline-wrapper">
+            <button class="nav-arrow left-arrow" id="scrollLeft">←</button>
+
+            <div class="timeline-container" id="timelineContainer">
+                <!-- Timeline cards will be inserted here by JavaScript -->
+                <div id="loadingTimeline" class="loading">
+                    ⌛ Loading Timeline... ⌛
+                </div>
+            </div>
+
+            <button class="nav-arrow right-arrow" id="scrollRight">→</button>
+        </div>
+
+        <!-- Info Section -->
+        <div class="timeline-info">
+            <p id="timelineMessage">Scroll horizontally to explore the anime series timeline</p>
+        </div>
+    </div>
+
+    <script src="src/timeline.js"></script>
+</body>
+
+</html>

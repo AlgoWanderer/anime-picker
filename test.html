@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AniList API Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background: #f9f9f9;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>AniList API Test</h1>
+    <p>This will test if the AniList API query is working correctly.</p>
+
+    <label>Start Year: <input type="number" id="startYear" value="2000" min="1960" max="2025"></label>
+    <label>End Year: <input type="number" id="endYear" value="2025" min="1960" max="2025"></label>
+    <button onclick="testAPI()">Test API</button>
+
+    <div id="result"></div>
+
+    <script>
+        const ANILIST_API_URL = 'https://graphql.anilist.co';
+
+        const query = `
+        query ($page: Int, $perPage: Int, $seasonYearStart: Int, $seasonYearEnd: Int) {
+          Page(page: $page, perPage: $perPage) {
+            pageInfo {
+              total
+            }
+            media(
+              type: ANIME,
+              seasonYear_greater: $seasonYearStart,
+              seasonYear_lesser: $seasonYearEnd,
+              sort: POPULARITY_DESC
+            ) {
+              id
+              title {
+                romaji
+                english
+              }
+              seasonYear
+            }
+          }
+        }
+        `;
+
+        async function testAPI() {
+            const resultDiv = document.getElementById('result');
+            const startYear = parseInt(document.getElementById('startYear').value);
+            const endYear = parseInt(document.getElementById('endYear').value);
+
+            resultDiv.innerHTML = '<p>Testing...</p>';
+
+            try {
+                console.log('Sending request with years:', startYear, endYear);
+
+                const response = await fetch(ANILIST_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        query: query,
+                        variables: {
+                            seasonYearStart: startYear - 1,
+                            seasonYearEnd: endYear + 1,
+                            page: 1,
+                            perPage: 5
+                        }
+                    })
+                });
+
+                const data = await response.json();
+                console.log('API Response:', data);
+
+                if (data.errors) {
+                    resultDiv.innerHTML = `
+                        <p class="error"><strong>API Error:</strong></p>
+                        <pre>${JSON.stringify(data.errors, null, 2)}</pre>
+                    `;
+                } else if (data.data && data.data.Page) {
+                    const total = data.data.Page.pageInfo.total;
+                    const anime = data.data.Page.media;
+
+                    resultDiv.innerHTML = `
+                        <p class="success"><strong>Success!</strong></p>
+                        <p>Found ${total} anime between ${startYear} and ${endYear}</p>
+                        <p><strong>Sample results:</strong></p>
+                        <ul>
+                            ${anime.map(a => `<li>${a.title.english || a.title.romaji} (${a.seasonYear})</li>`).join('')}
+                        </ul>
+                    `;
+                } else {
+                    resultDiv.innerHTML = '<p class="error">Unexpected response format</p>';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                resultDiv.innerHTML = `<p class="error"><strong>Error:</strong> ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+
+</html>

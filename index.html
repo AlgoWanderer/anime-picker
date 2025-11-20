@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Anime Generator</title>
+    <link rel="stylesheet" href="src/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>RANDOM ANIME GENERATOR</h1>
+            <marquee behavior="scroll" direction="left">Welcome to the Random Anime Generator! Click the button below to
+                discover a new anime!</marquee>
+        </header>
+
+        <!-- Main Content Area -->
+        <div class="main-wrapper">
+            <!-- Left Sidebar -->
+            <aside class="sidebar left-sidebar">
+                <div class="character-box">
+                    <img src="public/images/doraemon.png" alt="Doraemon" class="character-img">
+                    <p class="character-name">Doraemon</p>
+                </div>
+                <div class="character-box">
+                    <img src="public/images/sawamura.png" alt="Sawamura" class="character-img">
+                    <p class="character-name">Sawamura</p>
+                </div>
+            </aside>
+
+            <!-- Center Content -->
+            <main class="content">
+                <div class="generator-box">
+                    <!-- Date Range Controls -->
+                    <div class="date-range-controls">
+                        <h3 class="controls-title">SELECT YEAR RANGE</h3>
+                        <div class="year-inputs">
+                            <div class="input-group">
+                                <label for="startYear">From:</label>
+                                <input type="number" id="startYear" min="1960" max="2025" value="1960"
+                                    class="year-input">
+                            </div>
+                            <div class="range-display">
+                                <span id="rangeDisplay">1960 - 2025</span>
+                            </div>
+                            <div class="input-group">
+                                <label for="endYear">To:</label>
+                                <input type="number" id="endYear" min="1960" max="2025" value="2025" class="year-input">
+                            </div>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" id="startSlider" min="1960" max="2025" value="1960" class="year-slider">
+                            <input type="range" id="endSlider" min="1960" max="2025" value="2025" class="year-slider">
+                        </div>
+                    </div>
+
+                    <button id="generateBtn" class="retro-button">
+                        <span class="button-text">GENERATE RANDOM ANIME</span>
+                    </button>
+
+                    <div id="loadingText" class="loading" style="display: none;">
+                        Loading... Thank you for your patience desu...
+                    </div>
+
+                    <div id="animeDisplay" class="anime-display" style="display: none;">
+                        <div class="anime-header">
+                            <img id="animeImage" src="" alt="Anime Cover" class="anime-cover">
+                        </div>
+
+                        <div class="anime-info">
+                            <h2 id="animeTitle" class="anime-title"></h2>
+
+                            <table class="info-table">
+                                <tr>
+                                    <td class="label">Episodes:</td>
+                                    <td id="episodes" class="value">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Genres:</td>
+                                    <td id="genres" class="value">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">AniList Score:</td>
+                                    <td id="score" class="value">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Studio:</td>
+                                    <td id="studio" class="value">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Rating:</td>
+                                    <td id="rating" class="value">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Themes:</td>
+                                    <td id="themes" class="value">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Demographics:</td>
+                                    <td id="demographics" class="value">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Aired:</td>
+                                    <td id="airDates" class="value">-</td>
+                                </tr>
+                            </table>
+
+                            <div class="plot-section">
+                                <h3 class="plot-title">Plot:</h3>
+                                <p id="plot" class="plot-text">-</p>
+                            </div>
+
+                            <div class="more-info-box">
+                                <a id="moreInfoLink" href="#" target="_blank" class="more-info-link">
+                                    Click Here for More Info
+                                </a>
+                                <button id="viewTimelineBtn" class="timeline-button" style="display: none;">
+                                    📅 VIEW TIMELINE
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Right Sidebar -->
+            <aside class="sidebar right-sidebar">
+                <div class="character-box">
+                    <img src="public/images/inori.png" alt="Inori" class="character-img">
+                    <p class="character-name">Inori</p>
+                </div>
+                <div class="character-box">
+                    <img src="public/images/oreki.png" alt="Oreki" class="character-img">
+                    <p class="character-name">Oreki</p>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>Powered by AniList API | Made by AlgoWanderer using AntiGravity</p>
+        </footer>
+    </div>
+
+    <script src="src/app.js"></script>
+</body>
+
+</html>
